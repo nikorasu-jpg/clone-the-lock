@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=3 uid="uid://dn234lv16lvph"]
+
+[ext_resource type="Texture2D" uid="uid://dhqdlwr17yrym" path="res://assets/img/point.png" id="1_r0uly"]
+[ext_resource type="Script" uid="uid://08gbtplchwo1" path="res://scripts/point.gd" id="1_tue75"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tue75"]
+radius = 13.0
+
+[sub_resource type="Animation" id="Animation_imn7a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Point:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.185, 0.185)]
+}
+
+[sub_resource type="Animation" id="Animation_tue75"]
+resource_name = "point_pop_up"
+length = 0.2
+step = 0.0328
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Point:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(0.185, 0.185)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tw0ea"]
+_data = {
+&"RESET": SubResource("Animation_imn7a"),
+&"point_pop_up": SubResource("Animation_tue75")
+}
+
+[node name="point" type="Area2D"]
+script = ExtResource("1_tue75")
+
+[node name="Point" type="Sprite2D" parent="."]
+position = Vector2(1.90735e-06, -199.23)
+scale = Vector2(0.185, 0.185)
+texture = ExtResource("1_r0uly")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -199.23)
+scale = Vector2(1.63443, 1.63443)
+shape = SubResource("CircleShape2D_tue75")
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_tw0ea")
+}
